@@ -28,10 +28,10 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
         {people?.map(person => {
           const { sex, born, died, fatherName, motherName, slug } = person;
           const personMother = people.find(
-            parent => parent.name === person.motherName,
+            parent => parent.name === motherName,
           );
           const personFather = people.find(
-            parent => parent.name === person.fatherName,
+            parent => parent.name === fatherName,
           );
 
           return (
