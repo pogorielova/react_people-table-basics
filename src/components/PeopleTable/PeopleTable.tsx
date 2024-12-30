@@ -8,6 +8,17 @@ type Props = {
 };
 
 export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
+  const peopleToRender = people?.map(person => {
+    const personMother = people.find(
+      parent => parent.name === person.motherName,
+    );
+    const personFather = people.find(
+      parent => parent.name === person.fatherName,
+    );
+
+    return { ...person, personMother, personFather };
+  });
+
   return (
     <table
       data-cy="peopleTable"
@@ -25,14 +36,17 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedPerson }) => {
       </thead>
 
       <tbody>
-        {people?.map(person => {
-          const { sex, born, died, fatherName, motherName, slug } = person;
-          const personMother = people.find(
-            parent => parent.name === motherName,
-          );
-          const personFather = people.find(
-            parent => parent.name === fatherName,
-          );
+        {peopleToRender?.map(person => {
+          const {
+            sex,
+            born,
+            died,
+            fatherName,
+            motherName,
+            slug,
+            personMother,
+            personFather,
+          } = person;
 
           return (
             <tr
